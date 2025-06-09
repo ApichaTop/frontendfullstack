@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { FaEdit } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 type User = {
   id: number;
   name: string;
@@ -10,17 +11,24 @@ type User = {
 const mockUsers: User[] = [
   { id: 1, name: "Alice Johnson", email: "alice@example.com", role: "Admin" },
   { id: 2, name: "Bob Smith", email: "bob@example.com", role: "User" },
-  { id: 3, name: "Charlie Brown", email: "charlie@example.com", role: "Editor" },
+  {
+    id: 3,
+    name: "Charlie Brown",
+    email: "charlie@example.com",
+    role: "Editor",
+  },
 ];
 
 const Userpage: React.FC = () => {
   const [users, setUsers] = useState<User[]>(mockUsers);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", role: "" });
-  
+
   const handleAddUser = () => setShowForm(true);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -116,6 +124,9 @@ const Userpage: React.FC = () => {
                 <th className="py-2 px-2 sm:px-4 border-b text-left">Name</th>
                 <th className="py-2 px-2 sm:px-4 border-b text-left">Email</th>
                 <th className="py-2 px-2 sm:px-4 border-b text-left">Role</th>
+                <th className="py-2 px-2 sm:px-4 border-b text-left">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -125,6 +136,26 @@ const Userpage: React.FC = () => {
                   <td className="py-2 px-2 sm:px-4 border-b">{user.name}</td>
                   <td className="py-2 px-2 sm:px-4 border-b">{user.email}</td>
                   <td className="py-2 px-2 sm:px-4 border-b">{user.role}</td>
+                  <td className="py-2 px-2 sm:px-4 border-b">
+                    <div className="flex items-center space-x-4">
+                      <button
+                        className="text-blue-600 scale-150"
+                        onClick={() => {
+                          alert(`Edit user: ${user.name}`);
+                        }}
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="text-red-600 scale-150"
+                        onClick={() => {
+                          alert(`Delete user: ${user.name}`);
+                        }}
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
