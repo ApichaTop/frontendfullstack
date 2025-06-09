@@ -60,6 +60,7 @@ const Login: React.FC = () => {
         >
           Login
         </button>
+        <p className="mt-4 text-center">don't have an account <button className="text-blue-600 hover:underline">register</button> here</p>
       </form>
     </div>
   );
