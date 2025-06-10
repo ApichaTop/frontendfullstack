@@ -8,6 +8,7 @@ export const routes: Route[] = [...usersPages];
 
 export const router = [
     ...authenPages,
+    
     {
         path: "/",
         element:(
