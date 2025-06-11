@@ -12,7 +12,9 @@ function App() {
   },[token, navigate])
   return (
     <ThemeProvider defaultTheme='dark'>
+    <div className='px-12 py-8 '>
     <Outlet />
+    </div>
     </ThemeProvider>
   )
 }

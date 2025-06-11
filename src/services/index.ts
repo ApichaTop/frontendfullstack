@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-
+import { useAuthStore } from '@/stores';
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 const EXTERNAL_API_URL = import.meta.env.VITE_APP_EXTERNAL_API;
 
@@ -23,10 +23,11 @@ class BaseService {
       },
     });
     this.api.interceptors.request.use((config: any) => {
+      const {token} = useAuthStore.getState();
       const configuration = {
         ...config,
         headers: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          Authorization: `Bearer ${token}`,
           ...config.headers,
         },
       };
@@ -38,7 +39,7 @@ class BaseService {
         if (data.status === 'fail') {
           console.error('error');
           // }
-        } else if (data.code === 4039) {
+        } else if (response.status === 401) {
           sessionStorage.clear();
           window.location.href = '/login';
         }

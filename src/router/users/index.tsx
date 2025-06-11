@@ -5,6 +5,11 @@ const usersPages = [
         path: "/users",
         name: "users",
         element: <User />,
+    },
+    {
+        path: "/",
+        name: "users",
+        element: <User />,
     }
 ]
 
